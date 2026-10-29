@@ -1,0 +1,11 @@
+CAFE DU COIN
+Receipt #4471
+2026-10-20  09:14
+
+Espresso            2.50
+Croissant           1.80
+Orange juice        3.20
+
+TOTAL               7.50 EUR
+Paid by card
+Thank you!

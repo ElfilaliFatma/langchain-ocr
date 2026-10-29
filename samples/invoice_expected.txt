@@ -1,0 +1,14 @@
+ACME SUPPLIES SARL
+12 rue de la Paix, 75002 Paris
+Invoice number: INV-2026-0142
+Invoice date: 2026-10-12
+Due date: 2026-11-12
+
+Description            Qty    Unit      Total
+Wireless keyboard       2    45.00      90.00
+USB-C hub              1    39.90      39.90
+Shipping                               12.00
+
+Subtotal                              141.90
+VAT 20%                                28.38
+TOTAL DUE                             170.28 EUR
