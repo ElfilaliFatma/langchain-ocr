@@ -1,0 +1,86 @@
+{
+  "engine": "rapidocr",
+  "samples": [
+    {
+      "file": "invoice.png",
+      "variant": "raw",
+      "cer": 0.4464,
+      "cer_flat": 0.0474,
+      "wer": 0.0474,
+      "mean_confidence": 0.994,
+      "duration_ms": 5293.1,
+      "fields": {
+        "supplier": false,
+        "invoice_number": true,
+        "due_date": true,
+        "total": true
+      },
+      "field_recall": 0.75,
+      "text": "ACMESUPPLIESSARL\n12 rue delaPaix,75002Paris\nInvoice number:INV-2026-0142\nInvoice date:2026-10-12\nDuedate:2026-11-12\nDescription\nQty\nUnit\nTotal\nWirelesskeyboard\n2\n45.00\n90.00\nUSB-C hub\n1\n39.90\n39.90\nShipping\n12.00\nSubtotal\n141.90\nVAT20%\n28.38\nTOTALDUE\n170.28 EUR"
+    },
+    {
+      "file": "invoice.png",
+      "variant": "upscaled_x2",
+      "cer": 0.4174,
+      "cer_flat": 0.0182,
+      "wer": 0.0182,
+      "mean_confidence": 0.992,
+      "duration_ms": 5659.9,
+      "fields": {
+        "supplier": false,
+        "invoice_number": true,
+        "due_date": true,
+        "total": true
+      },
+      "field_recall": 0.75,
+      "text": "ACMESUPPLIESSARL\n12 rue de la Paix, 75002 Paris\nInvoice number: INV-2026-0142\nInvoice date: 2026-10-12\nDue date: 2026-11-12\nDescription\nQty  Unit\ntTotal\nWireless keyboard\n245.00\n90.00\nUSB-C hub\n139.90\n39.90\nShipping\n12.00\nSubtotal\n141.90\nVAT 20%\n28.38\nTOTAL DUE\n170.28 EUR"
+    },
+    {
+      "file": "receipt.png",
+      "variant": "raw",
+      "cer": 0.3046,
+      "cer_flat": 0.031,
+      "wer": 0.031,
+      "mean_confidence": 0.989,
+      "duration_ms": 2248.5,
+      "fields": {
+        "receipt_number": true,
+        "total": true
+      },
+      "field_recall": 1.0,
+      "text": "CAFEDUCOIN\nReceipt #4471\n2026-10-2009:14\nEspresso\n2.50\nCroissant\n1.80\nOrangejuice\n3.20\nTOTAL\n7.50 EUR\nPaid by card\nThank you!"
+    },
+    {
+      "file": "receipt.png",
+      "variant": "upscaled_x2",
+      "cer": 0.2816,
+      "cer_flat": 0.0,
+      "wer": 0.0,
+      "mean_confidence": 0.994,
+      "duration_ms": 2647.7,
+      "fields": {
+        "receipt_number": true,
+        "total": true
+      },
+      "field_recall": 1.0,
+      "text": "CAFE DU COIN\nReceipt #4471\n2026-10-20 09:14\nEspresso\n2.50\nCroissant\n1.80\nOrange juice\n3.20\nTOTAL\n7.50 EUR\nPaid by card\nThank you!"
+    }
+  ],
+  "variants": {
+    "raw": [
+      0.0474,
+      0.031
+    ],
+    "upscaled_x2": [
+      0.0182,
+      0.0
+    ]
+  },
+  "average_cer": 0.3625,
+  "average_cer_flat": 0.0241,
+  "average_field_recall": 0.875,
+  "variant_average_cer": {
+    "raw": 0.0392,
+    "upscaled_x2": 0.0091
+  }
+}
