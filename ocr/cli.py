@@ -4,11 +4,22 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 from .config import Settings
 from .engines import get_engine
 from .pipeline import DocumentPipeline, build_default_pipeline
+
+
+def use_utf8_console() -> None:
+    """Windows consoles default to cp1252, which cannot print OCR accents."""
+
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
 
 IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".bmp", ".tif", ".tiff", ".webp", ".pdf"}
 
@@ -30,6 +41,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
 
 
 def main(argv: list[str] | None = None) -> int:
+    use_utf8_console()
     args = parse_args(argv)
     settings = Settings.from_env()
 
