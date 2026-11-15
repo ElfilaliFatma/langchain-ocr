@@ -74,7 +74,7 @@ is known exactly and no binary files need to be committed.
 
 ## 4. Testing and results
 
-### 4.1 Unit tests (24 tests)
+### 4.1 Unit tests (27 tests)
 
 - engine dispatch and unknown-engine rejection;
 - Tesseract absence produces a clear error instead of a stack trace;

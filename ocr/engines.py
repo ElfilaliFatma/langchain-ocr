@@ -12,7 +12,6 @@ cloud OCR later) never touches the LangChain layer.
 
 from __future__ import annotations
 
-import io
 import shutil
 import time
 from abc import ABC, abstractmethod
@@ -155,17 +154,17 @@ def load_image(path: str | Path) -> Image.Image:
 
 
 def _first_pdf_page(path: Path) -> Image.Image:
+    """Render the first page of a PDF to an image using pypdfium2."""
     try:
-        import pypdfium2 as pdfium  # optional, better rendering
-    except ImportError:
-        pdfium = None
-    if pdfium is not None:
-        document = pdfium.PdfDocument(str(path))
-        page = document[0]
-        return page.render(scale=2).to_pil()
-    raise RuntimeError(
-        "PDF input needs pypdfium2 (pip install pypdfium2) or a PNG/JPEG export."
-    )
+        import pypdfium2 as pdfium
+    except ImportError as exc:
+        raise RuntimeError(
+            "PDF support requires pypdfium2. Install it with "
+            "`pip install pypdfium2`, or upload the page as a PNG/JPEG."
+        ) from exc
+
+    document = pdfium.PdfDocument(str(path))
+    return document[0].render(scale=2).to_pil()
 
 
 def preprocess(image: Image.Image, *, grayscale: bool = True, upscale: float = 1.0,
@@ -225,9 +224,3 @@ def group_words_into_lines(words: list[OcrWord]) -> list[OcrWord]:
 
 def join_lines(words: list[OcrWord]) -> str:
     return "\n".join(word.text for word in words)
-
-
-def image_to_bytes(image: Image.Image, fmt: str = "PNG") -> bytes:
-    buffer = io.BytesIO()
-    image.save(buffer, format=fmt)
-    return buffer.getvalue()

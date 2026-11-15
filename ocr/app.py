@@ -55,7 +55,12 @@ def main() -> None:
         st.info("Upload a document to start. Sample images live in `samples/`.")
         return
 
-    image = load_image_from_upload(uploaded)
+    try:
+        image = load_image_from_upload(uploaded)
+    except Exception as exc:
+        st.error(f"Could not open this file: {exc}")
+        return
+
     left, right = st.columns([1, 1])
     with left:
         st.image(image, caption="Input", use_container_width=True)
@@ -107,15 +112,24 @@ def main() -> None:
 
 
 def load_image_from_upload(uploaded) -> Image.Image:
-    """Streamlit uploads are file-like; PDfs need a temp file."""
+    """Convert a Streamlit upload (image or PDF) into a PIL image.
 
-    if uploaded.name.lower().endswith(".pdf"):
-        import tempfile
+    PDFs must be written to a temporary file because pypdfium2 needs a real
+    path; the file is removed as soon as the page has been rendered.
+    """
+    if not uploaded.name.lower().endswith(".pdf"):
+        return Image.open(uploaded)
 
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as handle:
-            handle.write(uploaded.read())
-            return load_image(handle.name)
-    return Image.open(uploaded)
+    import os
+    import tempfile
+
+    handle, path = tempfile.mkstemp(suffix=".pdf")
+    try:
+        with os.fdopen(handle, "wb") as file:
+            file.write(uploaded.getbuffer())
+        return load_image(path)
+    finally:
+        os.remove(path)
 
 
 if __name__ == "__main__":
